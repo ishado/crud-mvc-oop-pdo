@@ -20,3 +20,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`user_name`       VARCHAR(255) NOT NULL,
 	`user_email`      VARCHAR(255) NOT NULL
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+/* Example */
+INSERT INTO `users` (`user_name`, `user_email`) VALUES ('Anonymous', 'mabuhay@anon.me');
+INSERT INTO `users` (`user_name`, `user_email`) VALUES ('John Smith', 'yo@smith.io');
+INSERT INTO `users` (`user_name`, `user_email`) VALUES ('Alice', 'howdy@alice.xyz');
+INSERT INTO `users` (`user_name`, `user_email`) VALUES ('Bob', 'aloha@bob.com');
+INSERT INTO `users` (`user_name`, `user_email`) VALUES ('John Doe', 'hi@john.doe');
