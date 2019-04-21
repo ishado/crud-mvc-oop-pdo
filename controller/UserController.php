@@ -105,8 +105,12 @@ class UserController
 	 */
 	public function showUsers()
 	{
-		$title = 'Users';
-		$users = $this->userService->getUsers();
+		$title   = 'Users';
+		$orderBy = isset( $_GET['orderby'] ) ? $_GET['orderby'] : 'user_id';
+
+		if ( $orderBy == null ) throw new Exception( 'Internal error' );
+
+		$users = $this->userService->getUsers( $orderBy );
 
 		include( '/view/user/users.php' );
 	}
