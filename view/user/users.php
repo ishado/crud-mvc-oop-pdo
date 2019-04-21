@@ -13,8 +13,8 @@
 			<table class="table table-striped mb-0">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
+						<th><a href="?orderby=user_name">Name</a></th>
+						<th><a href="?orderby=user_email">Email</a></th>
 						<th>Actions</th>
 					</tr>
 				</thead>
