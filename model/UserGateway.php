@@ -70,9 +70,9 @@ class UserGateway
 	/**
 	 * Select All
 	 */
-	public function selectAll( $table, $orderBy )
+	public function selectAll( $table, $orderBy, $sort )
 	{
-		$sql = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderBy . ' DESC';
+		$sql = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderBy . ' ' . $sort;
 
 		$stmt = $this->conn->prepare( $sql );
 		$stmt->execute();
