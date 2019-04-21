@@ -72,10 +72,12 @@ class UserService
 	/**
 	 * Get Users
 	 */
-	public function getUsers()
+	public function getUsers( $orderBy )
 	{
+		$sort = ( $orderBy == 'user_id' ) ? $sort = 'DESC' : $sort = 'ASC';
+
 		try {
-			return $this->userGateway->selectAll( 'users', 'user_id' );
+			return $this->userGateway->selectAll( 'users', $orderBy, $sort );
 		} catch ( Exception $e ) {
 			throw $e;
 			$this->getErrorLog( $e );
