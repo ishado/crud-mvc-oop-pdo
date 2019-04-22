@@ -110,7 +110,8 @@ class UserController
 
 		if ( $orderBy == null ) throw new Exception( 'Internal error' );
 
-		$users = $this->userService->getUsers( $orderBy );
+		$pagination = $this->userService->pagination( 5 );
+		$users      = $this->userService->getUsers( $orderBy, $pagination );
 
 		include( '/view/user/users.php' );
 	}
