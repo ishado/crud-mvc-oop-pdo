@@ -70,9 +70,9 @@ class UserGateway
 	/**
 	 * Select All
 	 */
-	public function selectAll( $table, $orderBy, $sort )
+	public function selectAll( $table, $orderBy, $sort, $pagination )
 	{
-		$sql = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderBy . ' ' . $sort;
+		$sql = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderBy . ' ' . $sort . ' LIMIT ' . $pagination['start'] . ', ' . $pagination['perpage'];
 
 		$stmt = $this->conn->prepare( $sql );
 		$stmt->execute();
@@ -94,6 +94,19 @@ class UserGateway
 		$stmt = $this->conn->prepare( $sql );
 		$stmt->bindValue( ':value', $value );
 		$stmt->bindValue( ':id',    $id );
+		$stmt->execute();
+
+		return $stmt->fetch( PDO::FETCH_OBJ );
+	}
+
+	/**
+	 * Count Total Rows
+	 */
+	public function countTotalRows( $table )
+	{
+		$sql = 'SELECT COUNT(*) AS total FROM ' . $table;
+
+		$stmt = $this->conn->prepare( $sql );
 		$stmt->execute();
 
 		return $stmt->fetch( PDO::FETCH_OBJ );
