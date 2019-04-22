@@ -32,6 +32,8 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+
+			<?php include( '/view/template/pagination.php' ); ?>
 		</div>
 	</section>
 
