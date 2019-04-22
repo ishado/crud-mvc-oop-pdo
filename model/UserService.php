@@ -72,12 +72,12 @@ class UserService
 	/**
 	 * Get Users
 	 */
-	public function getUsers( $orderBy )
+	public function getUsers( $orderBy, $pagination )
 	{
 		$sort = ( $orderBy == 'user_id' ) ? $sort = 'DESC' : $sort = 'ASC';
 
 		try {
-			return $this->userGateway->selectAll( 'users', $orderBy, $sort );
+			return $this->userGateway->selectAll( 'users', $orderBy, $sort, $pagination );
 		} catch ( Exception $e ) {
 			throw $e;
 			$this->getErrorLog( $e );
@@ -105,6 +105,26 @@ class UserService
 		if ( empty( $errors ) ) return;
 
 		throw new ValidationException( $errors );
+	}
+
+	/**
+	 * Pagination
+	 */
+	public function pagination( $perpage )
+	{
+		$page        = ( isset( $_GET['page'] ) && ! empty( $_GET['page'] ) ) ? $_GET['page'] : 1;
+		$pages       = $this->userGateway->countTotalRows( 'users' );
+		$total_pages = ceil( $pages->total / $perpage );
+		$start       = $perpage * $page - $perpage;
+
+		$result = array(
+			'page'        => $page,
+			'total_pages' => $total_pages,
+			'start'       => $start,
+			'perpage'     => $perpage,
+		);
+
+		return $result;
 	}
 
 	/**
