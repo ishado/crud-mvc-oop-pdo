@@ -11,7 +11,7 @@ USE `crud-mvc-oop-pdo`;
 | user_updated    | DATETIME     | NO   |     | CURRENT_TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP |
 | user_name       | VARCHAR(255) | NO   |     | NULL              |                             |
 | user_email      | VARCHAR(255) | NO   |     | NULL              |                             |
-| user_country    | INT(11)      | NO   |     | NULL              |                             |
+| user_country    | INT(4)       | NO   |     | NULL              |                             |
 +-----------------+--------------+------+-----+-------------------+-----------------------------+
 */
 CREATE TABLE IF NOT EXISTS `users` (
@@ -34,13 +34,13 @@ INSERT INTO `users` (`user_name`, `user_email`, `user_country`) VALUES ('John Do
 +--------------+--------------+------+-----+---------+----------------+
 | Field        | Type         | Null | Key | Default | Extra          |
 +--------------+--------------+------+-----+---------+----------------+
-| country_id   | INT(11)      | NO   | PRI | NULL    | AUTO_INCREMENT |
+| country_id   | INT(4)       | NO   | PRI | NULL    | AUTO_INCREMENT |
 | country_code | VARCHAR(2)   | NO   |     | NULL    |                |
 | country_name | VARCHAR(255) | NO   |     | NULL    |                |
 +--------------+--------------+------+-----+---------+----------------+
 */
 CREATE TABLE IF NOT EXISTS `countries` (
-	`country_id`   INT(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`country_id`   INT(4)       NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`country_code` VARCHAR(2)   NOT NULL,
 	`country_name` VARCHAR(255) NOT NULL
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
