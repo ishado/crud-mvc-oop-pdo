@@ -18,11 +18,11 @@ class UserService
 	/**
 	 * Create User
 	 */
-	public function createUser( $name, $email )
+	public function createUser( $name, $email, $country )
 	{
 		try {
-			$this->validateUserParams( $name, $email );
-			$this->userGateway->insertUser( $name, $email );
+			$this->validateUserParams( $name, $email, $country );
+			$this->userGateway->insertUser( $name, $email, $country );
 		} catch ( Exception $e ) {
 			throw $e;
 			$this->getErrorLog( $e );
@@ -32,11 +32,11 @@ class UserService
 	/**
 	 * Update User
 	 */
-	public function updateUser( $id, $name, $email )
+	public function updateUser( $id, $name, $email, $country )
 	{
 		try {
-			$this->validateUserParams( $name, $email, $id );
-			$this->userGateway->updateUser( $id, $name, $email );
+			$this->validateUserParams( $name, $email, $country, $id );
+			$this->userGateway->updateUser( $id, $name, $email, $country );
 		} catch ( Exception $e ) {
 			throw $e;
 			$this->getErrorLog( $e );
@@ -77,7 +77,20 @@ class UserService
 		$sort = ( $orderBy == 'user_id' ) ? $sort = 'DESC' : $sort = 'ASC';
 
 		try {
-			return $this->userGateway->selectAll( 'users', $orderBy, $sort, $pagination );
+			return $this->userGateway->selectAllUsers( $orderBy, $sort, $pagination );
+		} catch ( Exception $e ) {
+			throw $e;
+			$this->getErrorLog( $e );
+		}
+	}
+
+	/*
+	 * Get Countries
+	 */
+	public function getCountries()
+	{
+		try {
+			return $this->userGateway->selectAll( 'countries' );
 		} catch ( Exception $e ) {
 			throw $e;
 			$this->getErrorLog( $e );
@@ -87,13 +100,14 @@ class UserService
 	/**
 	 * Validate User Params
 	 */
-	public function validateUserParams( $name, $email, $id = '' )
+	public function validateUserParams( $name, $email, $country, $id = '' )
 	{
 		$errors = array();
 
 		// Check Fields
-		if ( ! isset( $name )  || empty( $name ) )  $errors[] = 'Name field is required';
-		if ( ! isset( $email ) || empty( $email ) ) $errors[] = 'Email field is required';
+		if ( ! isset( $name )    || empty( $name ) )  $errors[]   = 'Name field is required';
+		if ( ! isset( $email )   || empty( $email ) ) $errors[]   = 'Email field is required';
+		if ( ! isset( $country ) || empty( $country ) ) $errors[] = 'Country field is required';
 
 		// Email Validation
 		if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
