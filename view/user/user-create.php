@@ -22,6 +22,14 @@
 				<label for="email">Email <span style="color:#f00">*</span></label>
 				<input type="email" name="email" id="email" class="form-control" placeholder="hi@john.doe" required>
 			</div>
+			<div class="form-group">
+				<label for="country">Country <span style="color: #f00;">*</span></label>
+				<select name="country" id="country" class="form-control" required>
+					<?php foreach ( $countries as $country ) : ?>
+						<option value="<?= $country->country_id; ?>"><?= $country->country_name; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
 			<button type="submit" name="create" class="btn btn-primary">Create</button>
 			<a href="index.php" class="btn btn-light">Cancel</a>
 		</form>
