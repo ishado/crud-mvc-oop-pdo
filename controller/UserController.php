@@ -19,17 +19,19 @@ class UserController
 	 */
 	public function createUser()
 	{
-		$title  = 'Create User';
-		$name   = '';
-		$email  = '';
-		$errors = array();
+		$title     = 'Create User';
+		$name      = '';
+		$email     = '';
+		$countries = $this->userService->getCountries();
+		$errors    = array();
 
 		if ( isset( $_POST['create'] ) ) {
-			$name  = isset( $_POST['name'] )  ? $this->userService->cleanValue( $_POST['name'] )  : null;
-			$email = isset( $_POST['email'] ) ? $this->userService->cleanValue( $_POST['email'] ) : null;
+			$name    = isset( $_POST['name'] )    ? $this->userService->cleanValue( $_POST['name'] )    : null;
+			$email   = isset( $_POST['email'] )   ? $this->userService->cleanValue( $_POST['email'] )   : null;
+			$country = isset( $_POST['country'] ) ? $this->userService->cleanValue( $_POST['country'] ) : null;
 
 			try {
-				$this->userService->createUser( $name, $email );
+				$this->userService->createUser( $name, $email, $country );
 				$this->redirect( 'index.php' );
 			} catch ( ValidationException $e ) {
 				$errors = $e->getErrors();
@@ -44,21 +46,23 @@ class UserController
 	 */
 	public function updateUser()
 	{
-		$title  = "Update User";
-		$id     = isset( $_GET['id'] ) ? $_GET['id'] : null;
-		$name   = '';
-		$email  = '';
-		$user   = $this->userService->getUser( $id );
-		$errors = array();
+		$title     = "Update User";
+		$id        = isset( $_GET['id'] ) ? $_GET['id'] : null;
+		$name      = '';
+		$email     = '';
+		$user      = $this->userService->getUser( $id );
+		$countries = $this->userService->getCountries();
+		$errors    = array();
 
 		if ( ! $id ) throw new Exception( 'Internal error' );
 
 		if ( isset( $_POST['update'] ) ) {
-			$name  = isset( $_POST['name'] )  ? $this->userService->cleanValue( $_POST['name'] )  : null;
-			$email = isset( $_POST['email'] ) ? $this->userService->cleanValue( $_POST['email'] ) : null;
+			$name    = isset( $_POST['name'] )    ? $this->userService->cleanValue( $_POST['name'] )    : null;
+			$email   = isset( $_POST['email'] )   ? $this->userService->cleanValue( $_POST['email'] )   : null;
+			$country = isset( $_POST['country'] ) ? $this->userService->cleanValue( $_POST['country'] ) : null;
 
 			try {
-				$this->userService->updateUser( $id, $name, $email );
+				$this->userService->updateUser( $id, $name, $email, $country );
 				$this->redirect( 'index.php' );
 			} catch ( ValidationException $e ) {
 				$errors = $e->getErrors();
