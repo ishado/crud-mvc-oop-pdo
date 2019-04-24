@@ -29,6 +29,15 @@ return array(
 | user_updated    | DATETIME     | NO   |     | CURRENT_TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP |
 | user_name       | VARCHAR(255) | NO   |     | NULL              |                             |
 | user_email      | VARCHAR(255) | NO   |     | NULL              |                             |
+| user_country    | INT(4)       | NO   |     | NULL              |                             |
+
+#### Countries
+
+| Field        | Type         | Null | Key | Default | Extra          |
+|:-------------|:-------------|:-----|:----|:--------|:---------------|
+| country_id   | INT(4)       | NO   | PRI | NULL    | AUTO_INCREMENT |
+| country_code | VARCHAR(2)   | NO   |     | NULL    |                |
+| country_name | VARCHAR(255) | NO   |     | NULL    |                |
 
 ## License
 
