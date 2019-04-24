@@ -15,6 +15,7 @@
 					<tr>
 						<th><a href="?orderby=user_name">Name</a></th>
 						<th><a href="?orderby=user_email">Email</a></th>
+						<th><a href="?orderby=user_country">Country</a></th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -24,6 +25,7 @@
 					<tr>
 						<td><a href="?user=read&id=<?= $user->user_id; ?>"><?= $user->user_name; ?></a></td>
 						<td><?= $user->user_email; ?></td>
+						<td><?= $user->country_name; ?></td>
 						<td>
 							<a href="?user=update&id=<?= $user->user_id; ?>" class="btn btn-success btn-sm">Update</a>
 							<a href="?user=delete&id=<?= $user->user_id; ?>" class="btn btn-danger btn-sm" onclick="return confirm( 'Are you sure you want to delete?' );">Delete</a>
