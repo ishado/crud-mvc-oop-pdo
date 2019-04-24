@@ -17,28 +17,50 @@ class UserGateway
 	/**
 	 * Insert
 	 */
-	public function insertUser( $name, $email )
+	public function insertUser( $name, $email, $country )
 	{
-		$sql = 'INSERT INTO users ( user_name, user_email ) VALUES ( :name, :email )';
+		$sql = 'INSERT INTO users ( user_name, user_email, user_country ) VALUES ( :name, :email, :country )';
 
 		$stmt = $this->conn->prepare( $sql );
-		$stmt->bindParam( ':name',  $name );
-		$stmt->bindParam( ':email', $email );
+		$stmt->bindParam( ':name',    $name );
+		$stmt->bindParam( ':email',   $email );
+		$stmt->bindParam( ':country', $country );
 		$stmt->execute();
 	}
 
 	/**
 	 * Update
 	 */
-	public function updateUser( $id, $name, $email )
+	public function updateUser( $id, $name, $email, $country )
 	{
-		$sql = 'UPDATE users SET user_name = :name, user_email = :email WHERE user_id = :id';
+		$sql = 'UPDATE users SET user_name = :name, user_email = :email, user_country = :country
+		WHERE user_id = :id';
 
 		$stmt = $this->conn->prepare( $sql );
-		$stmt->bindParam( ':id',    $id );
-		$stmt->bindParam( ':name',  $name );
-		$stmt->bindParam( ':email', $email );
+		$stmt->bindParam( ':id',      $id );
+		$stmt->bindParam( ':name',    $name );
+		$stmt->bindParam( ':email',   $email );
+		$stmt->bindParam( ':country', $country );
 		$stmt->execute();
+	}
+
+	/**
+	 * Select All Users
+	 */
+	public function selectAllUsers( $orderBy, $sort, $pagination )
+	{
+		$sql = 'SELECT * FROM users
+		INNER JOIN countries ON users.user_country = countries.country_id
+		ORDER BY ' . $orderBy . ' ' . $sort . ' LIMIT ' . $pagination['start'] . ', ' . $pagination['perpage'];
+
+		$stmt = $this->conn->prepare( $sql );
+		$stmt->execute();
+
+		$result = array();
+
+		while ( $obj = $stmt->fetch( PDO::FETCH_OBJ ) ) $result[] = $obj;
+
+		return $result;
 	}
 
 	/**
@@ -53,6 +75,23 @@ class UserGateway
 		$stmt->execute();
 	}
 
+	/*
+	 * Select All
+	 */
+	public function selectAll( $table )
+	{
+		$sql = 'SELECT * FROM ' . $table;
+
+		$stmt = $this->conn->prepare( $sql );
+		$stmt->execute();
+
+		$result = array();
+
+		while ( $obj = $stmt->fetch( PDO::FETCH_OBJ ) ) $result[] = $obj;
+
+		return $result;
+	}
+
 	/**
 	 * Select By Id
 	 */
@@ -65,23 +104,6 @@ class UserGateway
 		$stmt->execute();
 
 		return $stmt->fetch( PDO::FETCH_OBJ );
-	}
-
-	/**
-	 * Select All
-	 */
-	public function selectAll( $table, $orderBy, $sort, $pagination )
-	{
-		$sql = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderBy . ' ' . $sort . ' LIMIT ' . $pagination['start'] . ', ' . $pagination['perpage'];
-
-		$stmt = $this->conn->prepare( $sql );
-		$stmt->execute();
-
-		$result = array();
-
-		while ( $obj = $stmt->fetch( PDO::FETCH_OBJ ) ) $result[] = $obj;
-
-		return $result;
 	}
 
 	/**
