@@ -4,7 +4,7 @@ A simple and intuitive CRUD system using the MVC pattern in OOP paradigm. To con
 
 ![crud mvc oop pdo](screenshot.png)
 
-## Database
+## DATABASE
 
 ### Config
 
@@ -39,6 +39,10 @@ return array(
 | country_code | VARCHAR(2)   | NO   |     | NULL    |                |
 | country_name | VARCHAR(255) | NO   |     | NULL    |                |
 
-## License
+## AUTHOR
+
+- Oleksandr Klochko / [@utoyvo](https://github.com/utoyvo)
+
+## LICENSE
 
 Code released under the [MIT License](LICENSE).
