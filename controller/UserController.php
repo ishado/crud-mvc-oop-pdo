@@ -1,6 +1,6 @@
 <?php
 
-require_once( '/model/UserService.php' );
+require_once( 'model/UserService.php' );
 
 /**
  * User Controller
@@ -69,7 +69,7 @@ class UserController
 			}
 		}
 
-		include( '/view/user/user-update.php' );
+		include( 'view/user/user-update.php' );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class UserController
 		$user  = $this->userService->getUser( $id );
 		$title = $user->user_name;
 
-		include( '/view/user/user-single.php' );
+		include( 'view/user/user-single.php' );
 	}
 
 	/**
@@ -117,7 +117,7 @@ class UserController
 		$pagination = $this->userService->pagination( 5 );
 		$users      = $this->userService->getUsers( $orderBy, $pagination );
 
-		include( '/view/user/users.php' );
+		include( 'view/user/users.php' );
 	}
 
 	/**
@@ -160,6 +160,6 @@ class UserController
 	 */
 	public function showError( $title, $message )
 	{
-		include( '/view/error/error.php' );
+		include( 'view/error/error.php' );
 	}
 }
