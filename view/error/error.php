@@ -1,4 +1,4 @@
-<?php include( '/view/template/header.php' ); ?>
+<?php include( 'view/template/header.php' ); ?>
 
 <div class="card mt-3 mb-3">
 	<div class="card-body">
@@ -7,4 +7,4 @@
 	</div>
 </div>
 
-<?php include( '/view/template/footer.php' ); ?>
+<?php include( 'view/template/footer.php' ); ?>
