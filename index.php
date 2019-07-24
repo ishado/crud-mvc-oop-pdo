@@ -15,7 +15,7 @@
  * @link      https://github.com/utoyvo/crud-mvc-oop-pdo
  */
 
-require_once( '/controller/UserController.php' );
+require_once( 'controller/UserController.php' );
 
 $controller = new UserController();
 $controller->handleRequest();
